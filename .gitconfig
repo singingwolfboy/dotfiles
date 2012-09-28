@@ -1,0 +1,71 @@
+[user]
+	name = David Baumgold
+	email = david@davidbaumgold.com
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+	ui = auto
+
+# source:
+# http://www.metacircus.com/hacking/2011/02/18/play-git-like-a-violin.html
+[alias]
+  # I like using the interactive mode to make complex commits
+  ai = add --interactive
+
+  # All the aliases relate to commits. Note that
+  # they are grouped by common prefixes, so I don't
+  # confuse what I want done by accident.
+  c = commit
+  # commit with a message
+  cm = commit -m
+  cma = commit -a -m
+  # amending the previous commit
+  ca = commit --amend
+  caa = commit -a --amend -C HEAD
+
+  # reset
+  ## soft resets
+  r = reset
+  r1 = reset HEAD^
+  r2 = reset HEAD^^
+  ## hard resets
+  rh = reset --hard
+  rh1 = reset HEAD^ --hard
+  rh1 = reset HEAD^^ --hard
+
+  # shortcuts for commands
+  s = status
+  d = diff
+  a = add
+  co = checkout
+  b = branch
+  l = log
+  f = fetch
+  r = reset
+    pr = pull-request
+	up = !git checkout $1 && git pull --recurse-submodules && git submodule update --merge
+	switch = !legit switch \"$@\"
+	branches = !legit branches
+	sprout = !legit sprout \"$@\"
+	unpublish = !legit unpublish \"$@\"
+	harvest = !legit harvest \"$@\"
+	sync = !legit sync \"$@\"
+	publish = !legit publish \"$@\"
+	graft = !legit graft \"$@\"
+    unpushed = !GIT_CURRENT_BRANCH=$(git name-rev --name-only HEAD) && git log origin/$GIT_CURRENT_BRANCH..$GIT_CURRENT_BRANCH --oneline
+    # note that return code is NOT preserved!
+    test = !"GIT_TOPLEVEL=$(git rev-parse --show-toplevel) && if [[ -x $GIT_TOPLEVEL/bin/test-stable ]]; then $GIT_TOPLEVEL/bin/test-stable; fi;"
+    p = !"GIT_TOPLEVEL=$(git rev-parse --show-toplevel) && if [[ -x $GIT_TOPLEVEL/bin/test-stable && $(git unpushed | wc -l) -gt 0 ]]; then $GIT_TOPLEVEL/bin/test-stable && git push; else git push; fi"
+[mergetool]
+	keepBackup = true
+[core]
+	excludesfile = /Users/singingwolfboy/.gitignore_global
+	quotepath = false
+[fetch]
+	recurseSubmodules = true
+[push]
+    default = upstream
+[branch]
+	autosetuprebase = always
