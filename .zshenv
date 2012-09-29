@@ -1,4 +1,10 @@
-export PATH="$HOME/local/bin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:$PATH"
+if [ -x /opt/local/bin/port ]; then
+    export PREFIX="/opt/local"
+else
+    export PREFIX="/usr"
+fi
+
+export PATH="$HOME/local/bin:/usr/local/bin:$PREFIX/bin:$PREFIX/sbin:$PATH"
 export EDITOR=`which vim`
 export PAGER=`which less`
 
@@ -8,7 +14,7 @@ fi
 
 alias ls='ls -G'
 alias less="less -R"
-alias vless='/opt/local/share/vim/vim73/macros/less.sh'
+alias vless="$PREFIX/share/vim/vim73/macros/less.sh"
 
 # color man pages
 export LESS_TERMCAP_mb=$'\E[01;31m'
