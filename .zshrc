@@ -30,26 +30,29 @@ zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
 
 zstyle ':vcs_info:*' enable git svn
 
-precmd () { vcs_info }
-
 # http://net.tutsplus.com/tutorials/tools-and-tips/how-to-customize-your-command-prompt/
 function put_spacing() {
-  local hn=$(hostname -s)
+  local hn=$(print -P %m)
   local dir=$(print -P %~)
+  local vcs_cnt
+  (( vcs_cnt = ${#vcs_info_msg_0_} - 31 ))
   if [ ${#hn} != 0 ]; then
     ((hn - ${#hn} - 10))
   else
     hn=0
   fi
   local numspaces
-  (( numspaces = ${COLUMNS} - ${#USER} - ${#dir} - ${#vcs_info_msg_0_} - ${#hn} - 2))
+  (( numspaces = ${COLUMNS} - ${#USER} - ${#dir} - ${#hn} - ${vcs_cnt} ))
+  # print -n $numspaces
   local spaces=""
   for i in {1..$numspaces}; do
     spaces="${spaces} "
   done
-  echo $spaces
+  echo -n $spaces
 }
-PROMPT="%{$fg[green]%}%n %{$fg[white]%}%~ %{$fg[blue]%}"'${vcs_info_msg_0_}'"%{$reset_color %}$(put_spacing)%m
+
+precmd () { vcs_info }
+PROMPT="%{$fg[green]%}%n %{$fg[white]%}%~ %{$fg[blue]%}"'${vcs_info_msg_0_}'"%{$reset_color %}\$(put_spacing)%m
 %# "
 
 # http://pthree.org/2009/03/28/add-vim-editing-mode-to-your-zsh-prompt/
