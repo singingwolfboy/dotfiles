@@ -35,14 +35,18 @@ function put_spacing() {
   local hn=$(print -P %m)
   local dir=$(print -P %~)
   local vcs_cnt
-  (( vcs_cnt = ${#vcs_info_msg_0_} - 31 ))
-  if [ ${#hn} != 0 ]; then
+  if [[ -n ${vcs_info_msg_0_} ]]; then
+    (( vcs_cnt = ${#vcs_info_msg_0_} - 34 ))
+  else
+    vcs_cnt=0
+  fi
+  if [[ -n ${hn} ]]; then
     ((hn - ${#hn} - 10))
   else
     hn=0
   fi
   local numspaces
-  (( numspaces = ${COLUMNS} - ${#USER} - ${#dir} - ${#hn} - ${vcs_cnt} ))
+  (( numspaces = ${COLUMNS} - ${#USER} - ${#dir} - ${#hn} - ${vcs_cnt} - 3 ))
   # print -n $numspaces
   local spaces=""
   for i in {1..$numspaces}; do
