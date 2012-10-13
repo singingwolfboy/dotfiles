@@ -52,7 +52,7 @@ function rprompt_ln() {
 }
 
 precmd () { vcs_info }
-PROMPT="%{$fg[green]%}%n %{$fg[white]%}%~ %{$fg[blue]%}"'${vcs_info_msg_0_}'"%{$reset_color%}\$(rprompt_ln %m)
+PROMPT="%{$fg[green]%}%n %{$fg[white]%}%~ %{$fg[blue]%}"'${vcs_info_msg_0_}'"%{$reset_color %}\$(rprompt_ln %m)
 %# "
 
 # http://pthree.org/2009/03/28/add-vim-editing-mode-to-your-zsh-prompt/
