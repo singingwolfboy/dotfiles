@@ -30,33 +30,29 @@ zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
 
 zstyle ':vcs_info:*' enable git svn
 
-# http://net.tutsplus.com/tutorials/tools-and-tips/how-to-customize-your-command-prompt/
-function put_spacing() {
-  local hn=$(print -P %m)
-  local dir=$(print -P %~)
-  local vcs_cnt
-  if [[ -n ${vcs_info_msg_0_} ]]; then
-    (( vcs_cnt = ${#vcs_info_msg_0_} - 34 ))
-  else
-    vcs_cnt=0
-  fi
-  if [[ -n ${hn} ]]; then
-    ((hn - ${#hn} - 10))
-  else
-    hn=0
-  fi
-  local numspaces
-  (( numspaces = ${COLUMNS} - ${#USER} - ${#dir} - ${#hn} - ${vcs_cnt} - 3 ))
-  # print -n $numspaces
-  local spaces=""
-  for i in {1..$numspaces}; do
-    spaces="${spaces} "
-  done
-  echo -n $spaces
+function rprompt_ln() {
+  # MUST be called with \$(rprompt_ln [...])
+  # currently, this cannot handle color escapes (althought I don't know why)
+  # but it can handle zsh escapes like %m
+  local left
+  local right
+  local left_tpl
+  local right_stripped
+  local spacing
+
+  # strip color escapes using perl
+  right_stripped=$(echo "$*" | command perl -pe 's/\e\[\d\dm//g')
+  right=$(print -P $right_stripped)
+  # strip out everything starting from "$(rprompt_ln"
+  left_tpl=${PROMPT%\$\(rprompt_ln*};
+  left=$(print -P $left_tpl | command perl -pe 's/\e\[\d\dm//g');
+  (( spacing = ${COLUMNS} - ${#left} - ${#right} ))
+  # right-align with printf
+  printf "%${spacing}s%s" " " "$*"
 }
 
 precmd () { vcs_info }
-PROMPT="%{$fg[green]%}%n %{$fg[white]%}%~ %{$fg[blue]%}"'${vcs_info_msg_0_}'"%{$reset_color %}\$(put_spacing)%m
+PROMPT="%{$fg[green]%}%n %{$fg[white]%}%~ %{$fg[blue]%}"'${vcs_info_msg_0_}'"%{$reset_color%}\$(rprompt_ln %m)
 %# "
 
 # http://pthree.org/2009/03/28/add-vim-editing-mode-to-your-zsh-prompt/
