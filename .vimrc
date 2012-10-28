@@ -101,6 +101,10 @@ if filereadable($VIMRUNTIME . "/macros/matchit.vim")
  source $VIMRUNTIME/macros/matchit.vim
 endif
 
+if has("mouse")
+  set mouse=a
+endif
+
 " nnoremap <leader>a :Ack
 nnoremap <leader>` :NERDTreeToggle<CR>
 nnoremap <leader>t :TagbarToggle<CR>

@@ -1,4 +1,5 @@
-fpath=(~/zsh $fpath)
+fpath=(/usr/local/share/zsh-completions $fpath)
+
 autoload -U compinit promptinit colors
 compinit
 promptinit
@@ -6,13 +7,6 @@ colors
 autoload -Uz vcs_info
 vcs_info
 setopt prompt_subst
-
-# hub
-if which hub &> /dev/null; then
-    eval "$(hub alias -s zsh)"
-    local COMPL=/opt/local/share/zsh/site-functions/hub.zsh_completion
-    test -r $COMPL && source $COMPL
-fi
 
 # vim-style keybindings
 bindkey -v
@@ -67,23 +61,5 @@ zle -N zle-line-init
 zle -N zle-keymap-select
 RPROMPT='$VIMODE'
 
-# rbenv
-
-if which rbenv &> /dev/null; then
-  export PATH="$HOME/.rbenv/shims:${PATH}"
-  local COMPL=/opt/local/share/zsh/site-functions/rbenv.zsh_completion
-  test -r $COMPL && source $COMPL
-  function rbenv() {
-    command="$1"
-    if [ "$#" -gt 0 ]; then
-      shift
-    fi
-
-    case "$command" in
-    shell)
-      eval `rbenv "sh-$command" "$@"`;;
-    *)
-      command rbenv "$command" "$@";;
-    esac
-  }
-fi
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+if which hub > /dev/null; then eval "$(hub alias -s zsh)"; fi
