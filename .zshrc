@@ -24,6 +24,11 @@ zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
 
 zstyle ':vcs_info:*' enable git svn
 
+# edit command in $EDITOR
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
 function rprompt_ln() {
   # MUST be called with \$(rprompt_ln [...])
   # currently, this cannot handle color escapes (althought I don't know why)
