@@ -18,8 +18,8 @@ bindkey "^?" backward-delete-char  # vi-backward-delete-char
 
 # history search
 bindkey "^R" history-incremental-search-backward
-bindkey "^[[A" history-beginning-search-backward
-bindkey "^[[B" history-beginning-search-forward
+# bindkey "^[[A" history-beginning-search-backward
+# bindkey "^[[B" history-beginning-search-forward
 
 zstyle ':vcs_info:*' actionformats \
         '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
