@@ -34,3 +34,6 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 alias gti=git
 # `gi tpull` => `git pull`
 gi() { x="${1:1}"; shift; git $x $*; }
+
+export RBENV_ROOT=/usr/local/opt/rbenv
+
