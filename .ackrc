@@ -19,6 +19,7 @@
 --type-set=json=.json
 --type-set=sublime=.sublime-settings,.sublime-keymap,.sublime-macro,.sublime-mousemap
 --type-set=rst=.rst
+--type-set=less=.less
 --nonib
 --notmstuff
 --noxcode
