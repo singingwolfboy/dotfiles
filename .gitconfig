@@ -58,6 +58,7 @@
     # note that return code is NOT preserved!
     test = !"GIT_TOPLEVEL=$(git rev-parse --show-toplevel) && if [[ -x $GIT_TOPLEVEL/bin/test-stable ]]; then $GIT_TOPLEVEL/bin/test-stable; fi;"
     p = !"GIT_TOPLEVEL=$(git rev-parse --show-toplevel) && if [[ -x $GIT_TOPLEVEL/bin/test-stable && $(git unpushed | wc -l) -gt 0 ]]; then $GIT_TOPLEVEL/bin/test-stable && git push; else git push; fi"
+    releases = !"git tag | egrep \"^\\d\\d\\d\\d-\\d\\d-\\d\\d\""
 [mergetool]
 	keepBackup = true
 [core]
