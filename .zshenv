@@ -11,9 +11,11 @@ export EDITOR=`which vim`
 export PAGER=`which less`
 
 if [ -d /usr/local/share/python ]; then
-    export PATH="$PATH:/usr/local/share/python"
+    export PATH="/usr/local/share/python:$PATH"
 fi
-
+if [ -d /usr/local/share/npm ]; then
+    export PATH="/usr/local/share/npm/bin:$PATH"
+fi
 if [ -d /opt/local/lib/postgresql92 ]; then
     export PATH="$PATH:/opt/local/lib/postgresql92/bin"
 fi
