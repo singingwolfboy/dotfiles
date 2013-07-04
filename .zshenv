@@ -9,6 +9,7 @@ fi
 export PATH="$HOME/local/bin:$PREFIX/bin:$PREFIX/sbin:$PATH"
 export EDITOR=`which vim`
 export PAGER=`which less`
+export GOPATH=~/gopath
 
 if [ -d /usr/local/share/python ]; then
     export PATH="/usr/local/share/python:$PATH"
