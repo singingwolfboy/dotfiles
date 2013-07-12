@@ -20,6 +20,17 @@ fi
 if [ -d /opt/local/lib/postgresql92 ]; then
     export PATH="$PATH:/opt/local/lib/postgresql92/bin"
 fi
+if [ -x /usr/local/bin/brew ]; then
+    local gettext_versions;
+    gettext_versions=$(/usr/local/bin/brew list --versions gettext)
+    if [ gettext_versions ]; then
+        local gettext_array gettext_version;
+        gettext_array=("${(s/ /)gettext_versions}")
+        gettext_version=$gettext_array[-1]
+        export PATH="$PATH:/usr/local/Cellar/gettext/$gettext_version/bin"
+        export MANPATH="$MANPATH:/usr/local/Cellar/gettext/$gettext_version/share/man"
+    fi
+fi
 
 alias ls='ls -G'
 alias vless="$PREFIX/share/vim/vim73/macros/less.sh"
