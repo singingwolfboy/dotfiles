@@ -11,9 +11,6 @@ export EDITOR=`which vim`
 export PAGER=`which less`
 export GOPATH=~/gopath
 
-if [ -d /usr/local/share/python ]; then
-    export PATH="/usr/local/share/python:$PATH"
-fi
 if [ -d /usr/local/share/npm ]; then
     export PATH="/usr/local/share/npm/bin:$PATH"
 fi
