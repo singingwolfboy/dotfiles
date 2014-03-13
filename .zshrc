@@ -77,3 +77,6 @@ if which gh > /dev/null; then
 elif which hub > /dev/null; then
     eval "$(hub alias -s zsh)";
 fi
+if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
