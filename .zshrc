@@ -72,4 +72,8 @@ zle -N zle-keymap-select
 RPROMPT='$VIMODE'
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-if which hub > /dev/null; then eval "$(hub alias -s zsh)"; fi
+if which gh > /dev/null; then
+    eval "$(gh alias -s zsh)";
+elif which hub > /dev/null; then
+    eval "$(hub alias -s zsh)";
+fi
