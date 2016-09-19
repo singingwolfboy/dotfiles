@@ -57,8 +57,8 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 if which docker-machine > /dev/null 2>&1; then
-	docker_machines=$(docker-machine ls --quiet);
-	if [[ -n ${docker_machines[(r)default]} ]]; then
+    docker_machines=$(docker-machine ls --quiet);
+    if [[ -n ${docker_machines[(r)default]} ]]; then
         eval "$(docker-machine env default)";
     fi
 fi
