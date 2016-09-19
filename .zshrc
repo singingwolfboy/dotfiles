@@ -65,7 +65,7 @@ fi
 if which rbenv > /dev/null 2>&1; then
     eval "$(rbenv init -)";
 fi
-if which gh > /dev/null 2>&1; then
-    eval "$(gh alias -s zsh)";
+if which hub > /dev/null 2>&1; then
+    eval "$(hub alias -s zsh)";
 fi
 
