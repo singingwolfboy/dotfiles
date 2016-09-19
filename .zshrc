@@ -57,7 +57,10 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 if which docker-machine > /dev/null 2>&1; then
-    eval "$(docker-machine env default)";
+	docker_machines=$(docker-machine ls --quiet);
+	if [[ -n ${docker_machines[(r)default]} ]]; then
+        eval "$(docker-machine env default)";
+    fi
 fi
 if which rbenv > /dev/null 2>&1; then
     eval "$(rbenv init -)";
