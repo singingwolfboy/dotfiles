@@ -51,13 +51,13 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew python docker docker-compose pip virtualenvwrapper)
+plugins=(git gitfast brew python docker docker-compose pip virtualenvwrapper)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 if which docker-machine > /dev/null 2>&1; then
-    docker_machines=$(docker-machine ls --quiet);
+    docker_machines=$(docker-machine ls --filter state=Running --quiet);
     if [[ -n ${docker_machines[(r)default]} ]]; then
         eval "$(docker-machine env default)";
     fi
